@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<div th:insert="blocks/links :: head"></div>
+<body>
+        <div class="main">
+            <div class="authorization-container">
+                <img class="authorization-logo" th:src="@{/sources/logo.png}" alt="#">
+                <div class="authorization-header">Авторизация</div>
+                <div class="authorization-notification" th:if="${param.error}">Неверный логин или пароль.</div>
+                <form th:action="@{/login}" method="post">
+                    <input class="input-container" type="text" name="username" placeholder="Введите логин" size="40"/>
+                    <input class="input-container" type="password" name="password" placeholder="Введите пароль" size="40"/>
+                    <button type="submit" class="login-button">Войти</button>
+                </form>
+                <a href="#" class="authorization-footer-text-ftp">Забыли пароль?</a>        
+                <a href="/registration" class="authorization-footer-text">Зарегистрироваться</a>
+            </div>
+        </div>
+</body>
+</html>

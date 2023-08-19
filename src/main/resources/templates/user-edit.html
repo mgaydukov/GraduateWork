@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<div th:insert="blocks/links :: head"></div>
+<body>
+<div th:insert="blocks/menu :: menu"></div>
+<div class="main" th:each="users: ${user}">
+    <div class="user-edit">
+        <div class="user-edit-header" style="text-align: center"><p style="padding-top: 10px;">Изменение профиля администратором</p></div>
+        <div class="user-edit-content" >
+            <div class="user-edit-labels">
+                <div class="user-edit-label">Изменить имя</div>
+                <div class="user-edit-label">Изменить пароль</div>
+                <div class="user-edit-label">Изменить роли</div>
+                <div class="user-edit-label"></div>
+            </div>
+            <form class="user-edit-inputs" th:action="@{'/admin/useredit/' + ${user.id}}" method="post">
+                <input type="hidden" th:value="${user.id}" name="userId">
+                <input type="text" name="username" class="user-edit-input" th:value="${user.username}"/>
+                <input type="password" name="password" class="user-edit-input" th:value="${user.password}" />
+                <div class="user-edit-roles" th:each="role : ${roles}">
+                    <div>
+                        <label th:for="${role}" th:text="${role}"></label>
+                        <input type="checkbox" th:checked="${#lists.contains(user.roles, role)}" th:name="${role}">
+                    </div>
+                </div>
+                <button class="user-edit-button" type="submit">Сохранить</button>
+                <a href="javascript:history.back()" class="back-to-list">Назад</a>
+            </form>
+        </div>
+    </div>
+    <form class="user-edit-inputs" th:action="@{'/admin/useredit/' + ${user.id} + '/userdelete/'}" method="post">
+        <input type="hidden" th:value="${user.id}" name="userId">
+        <button class="user-edit-button" type="submit" style="width: 900px; margin: 20px auto;">Удалить аккаунт</button>
+    </form>
+</div>
+</body>
+</html>

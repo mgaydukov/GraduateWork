@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<div th:insert="blocks/links :: head"></div>
+<body>
+    <div th:insert="blocks/menu :: menu"></div>
+    <div class="main" th:each="v:${video}">
+        <div class="user-edit">
+            <div class="user-edit-header" style="text-align: center"><p style="padding-top: 20px;">Изменение видео</p></div>
+            <div class="user-edit-content" >
+                <div class="user-edit-labels">
+                    <div class="user-edit-label">Изменить название</div>
+                    <div class="user-edit-label">Изменить описание</div>
+                    <div class="user-edit-label" sec:authorize="hasAuthority('ADMIN')">Изменить текст</div>
+                </div>
+                <form class="user-edit-inputs" th:action="@{'/video/' + ${v.id} + '/edit/'}" method="post">
+                    <input type="hidden" th:value="${v.id}" name="videoId">
+                    <input type="text" name="name" class="user-edit-input" th:value="${v.name}"/>
+                    <input type="text" name="description" class="user-edit-input" th:value="${v.description}"/>
+                    <textarea sec:authorize="hasAuthority('ADMIN')" class="user-edit-input" th:text="${v.fullText}"
+                              name="fullText" placeholder="Пишите здесь" wrap="soft" style="height: 400px; padding: 5px 20px;"></textarea>
+                    <button class="user-edit-button" type="submit">Сохранить</button>
+                    <a href="javascript:history.back()" class="back-to-list">Назад</a>
+                </form>
+            </div>
+        </div>
+        <form class="user-edit-inputs" th:action="@{'/video/' + ${v.id} + '/edit/delete/'}" method="post">
+            <input type="hidden" th:value="${v.id}" name="videoId">
+            <button class="user-edit-button" type="submit" style="width: 900px; margin: 20px auto;">Удалить видео</button>
+        </form>
+    </div>
+</body>
+</html>

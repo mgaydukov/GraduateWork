@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<div th:insert="blocks/links :: head"></div>
+<body>
+    <div th:insert="blocks/menu :: menu"></div>
+    <div class="main">
+
+        <div class="video-add">
+            <div class="video-add-title">Добавление видео</div>
+            <form class="video-add-form" th:action="@{/video/add}" th:object="${user}" method="post">
+                <input type="text" class="video-add-name" name="name" placeholder="Введите название"></input>
+                <input type="text" class="video-add-link" name="link" placeholder="Введите ссылку"></input>
+                <select name="subject" class="video-add-subject" >
+                    <option selected disabled>Выберите раздел</option>
+                    <option value="language">Иностранные языки</option>
+                    <option value="economics">Экономика</option>
+                    <option value="history">История</option>
+                    <option value="other">Другое</option>
+                </select>
+                <textarea class="video-add-description" name="description" placeholder="Введите описание" wrap="soft"></textarea>
+                <input class="video-add-submit-botton" type="submit" value="Добавить">
+            </form>
+        </div>
+    </div>
+</body>
+</html>

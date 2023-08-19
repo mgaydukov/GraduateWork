@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<div th:insert="blocks/links :: head"></div>
+<body>
+    <div th:insert="blocks/menu :: menu"></div>
+    <div class="main">
+        <div class="video-main" th:each="v:${video}" >
+            <div class="video-header" th:each="u:${user}">
+                <div class="video-header-title" th:text="${v.name}"/>
+                <a th:if="${publisherId.equals(#request.userPrincipal.principal.id)} or ${u.isAdmin()}"
+                        th:href="@{'/video/' + ${v.id} + '/edit/'}" class="back-to-video">Редактировать</a>
+            </div>
+
+            <div class="video-content">
+                <iframe width="1280" height="720" th:src="'https://www.youtube.com/embed/' + ${v.youtubeId}"
+                        title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media;
+                        gyroscope; picture-in-picture; web-share" allowfullscreen style="border-radius:10px;">
+                </iframe>
+            </div>
+
+            <a th:href="'/video/'+ ${v.id} +'/solution'"><div class="video-to-answer">Перейти к ответу</div></a>
+
+            <div class="video-bio">
+                <div class="video-bio-info"><b>Из раздела:</b>
+                    <a th:text="${v.subject}" th:href="'/' + ${v.subject}" class="video-bio-link"/>
+                </div>
+                <div class="video-bio-info"><b>Опубликовал:</b>
+                    <a th:text="${publisher}" th:href="'/user/' + ${publisherId}" class="video-bio-link"/>
+                </div>
+                <div class="video-bio-info"><b>Описание: </b><pan class="video-bio-info" th:text="${v.description}"></pan>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

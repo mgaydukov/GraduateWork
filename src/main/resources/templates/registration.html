@@ -1,0 +1,20 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<div th:insert="blocks/links :: head"></div>
+<body>
+    <div class="main">
+        <div class="authorization-container">
+            <img class="authorization-logo" th:src="@{/sources/logo.png}" alt="#">
+            <div class="authorization-header">Регистрация</div>
+            <div class="authorization-notification" th:if="${errorMessage}" th:text="${errorMessage}"/>
+            <form th:action="@{/registration}" method="post">
+                <input class="input-container" type="text" name="username" placeholder="Введите логин" size="40"></input>
+                <input class="input-container" type="password" name="password" placeholder="Введите пароль" size="40"></input>
+                <input class="input-container" type="password" name="confirm" placeholder="Подтверждение пароля" size="40"></input>
+                <button type="submit" class="reg-button">Зарегистрироваться</button>
+            </form>
+
+            <a href="/login" class="authorization-footer-text">Уже зарегистрированы?</a>
+        </div>
+    </div>
+</body>
+</html>

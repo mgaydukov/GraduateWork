@@ -1,0 +1,38 @@
+<!DOCTYPE html >
+<html xmlns:th="http://www.thymeleaf.org">
+<div th:insert="blocks/links :: head"></div>
+<body>
+    <div th:insert="blocks/menu :: menu"></div>
+    <div class="main">
+        <div class="subject-header">
+            <div class="subject-title">Другие предметы</div>
+            <div class="subject-search">
+                <input type="text" class="subject-search-field" autocorrect="off" autocapitalize="off" spellcheck="false" placeholder="Поиск">
+                <img class="subject-lupa" th:src="@{/sources/lupa.png}">
+            </div>
+        </div>
+
+        <div th:insert="blocks/swiper :: swiper"></div>
+
+        <div class="subject-videos" id="content-video">
+            <div class="subject-title-section">Популярные видео</div>
+            <div class="subject-list" >
+                <a th:each="el : ${videos}" th:href="'/video/' + ${el.id}" class="subject-content">
+                    <img class="subject-content-img" th:src="${el.cover}" alt="">
+                    <div class="subject-content-name" th:text="${el.name}"/>
+                </a>
+            </div>
+        </div>
+
+        <div class="subject-playlists" id="content-playlist">
+            <div class="subject-title-section">Популярные плейлисты</div>
+            <div class="subject-list">
+                <a href="playlist.html" class="subject-content">
+                    <img class="subject-content-img" src="A:/d/site/sources/imgs/eng2.jpg" alt="">
+                    <div class="subject-content-name">Остальные предметы. Плейлист</div>
+                </a>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

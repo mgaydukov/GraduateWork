@@ -1,0 +1,50 @@
+<!DOCTYPE html >
+<html xmlns:th="http://www.thymeleaf.org">
+<div th:insert="blocks/links :: head"></div>
+<body>
+    <div th:insert="blocks/menu :: menu"></div>
+    <div class="main">
+
+        <div class="profile-header" th:each="e:${userInfo}">
+            <div class="profile-header-avatar"><img th:src="${e.profilePic}" alt=""></div>
+            <div class="profile-header-bio">
+                <div class="profile-header-bio-name" th:text="${e.username}"/>
+                <div class="profile-header-bio-bio" ><i th:text="${e.bio}"/></div>
+                <div class="profile-header-bio-start"><b>Участник с:</b> <pan th:text="${e.dateRegistration}"/></div>
+                <div th:if="${e.id.equals(#request.userPrincipal.principal.id)}" class="profile-header-bottons">
+                    <a th:href="@{'/user/edit/'}"><button type="button" class="profile-edit-button">Редектировать профиль</button></a>
+                    <form th:action="@{/logout}" method="post" style="overflow: hidden;">
+                        <button type="submit" class="profile-to-logout">Выйти из аккаунта</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <div th:insert="blocks/swiper :: swiper"></div>
+
+        <div class="subject-videos" id="content-video">
+            <div class="subject-title-section">Видео пользователя</div>
+            <div class="subject-list">
+                <a th:each="v:${videos}" th:href="'/video/' + ${v.id}" class="subject-content">
+                    <img class="subject-content-img" th:src="${v.cover}" alt="">
+                    <div class="subject-content-name" th:text="${v.name}"></div>
+                </a>
+            </div>
+        </div>
+
+        <div class="subject-playlists" id="content-playlist">
+            <div class="subject-title-section">Плейлисты пользователя</div>
+            <div class="subject-list">
+                <a href="../../../../../../site/html/playlist.html" class="subject-content">
+                    <img class="subject-content-img" th:src="@{/sources/imgs/eng2.jpg}" alt="">
+                    <div class="subject-content-name">Английский. Монолог о грибах</div>
+                </a>
+                <a href="../../../../../../site/html/playlist.html" class="subject-content">
+                    <img class="subject-content-img" th:src="@{/sources/imgs/eng2.jpg}" alt="">
+                    <div class="subject-content-name">Английский. Монолог о грибах</div>
+                </a>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

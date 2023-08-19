@@ -1,0 +1,67 @@
+<div th:fragment="menu">
+    <div class="menu">
+        <a th:href="@{/}" href="main.html" class="menu-container">
+            <div class="menu-container-txt">Главная</div>
+            <div class="menu-container-img"><img class="menu-img" th:src="@{/sources/logo.png}" alt="#"></div>
+        </a>
+
+        <div class="menu-container-section">
+            <div class="menu-container-txt-section">Личное</div>
+            <div class="menu-container-txt-section">—</div>
+        </div>
+
+        <a th:href="@{'/user/' + ${#request.userPrincipal.principal.id}}" class="menu-container">
+            <div class="menu-container-txt">Профиль</div>
+            <div class="menu-container-img"><img class="menu-img" th:src="@{/sources/user.png}" alt="#"></div>
+        </a>
+
+        <a th:href="@{/bookmarks}" href="bookmarks.html" class="menu-container">
+            <div class="menu-container-txt">Закладки</div>
+            <div class="menu-container-img"><img class="menu-img" th:src="@{/sources/bookmark.png}" alt="#"></div>
+        </a>
+
+        <form th:action="@{/logout}" method="post" style="overflow: hidden;">
+            <button class="menu-container-logout" type="submit">
+                <div class="menu-container-txt" style="margin: 0px; padding: 0px;">Выйти</div>
+                <div class="menu-container-img" style="margin: 0px; padding: 0px;"><img class="menu-img" th:src="@{/sources/logout.png}" alt="#"></div>
+            </button>
+        </form>
+
+        <div class="menu-container-section">
+            <div class="menu-container-txt-section">Обучение</div>
+            <div class="menu-container-txt-section">—</div>
+        </div>
+
+        <a  th:href="@{/language}" href="language.html" class="menu-container">
+            <div class="menu-container-txt">Иностранный язык</div>
+            <div class="menu-container-img"><img class="menu-img" th:src="@{/sources/eng.png}" alt="#"></div>
+        </a>
+        <a th:href="@{/economics}" href="economics.html" class="menu-container">
+            <div class="menu-container-txt">Экономика</div>
+            <div class="menu-container-img"><img class="menu-img" th:src="@{/sources/eco.png}" alt="#"></div>
+        </a>
+        <a  th:href="@{/history}" href="history.html" class="menu-container">
+            <div class="menu-container-txt">История</div>
+            <div class="menu-container-img"><img class="menu-img" th:src="@{/sources/his.png}" alt="#"></div>
+        </a>
+        <a th:href="@{/other}" href="other.html" class="menu-container">
+            <div class="menu-container-txt">Другое</div>
+            <div class="menu-container-img"><img class="menu-img" th:src="@{/sources/oth.png}" alt="#"></div>
+        </a>
+
+        <div class="menu-container-section">
+            <div class="menu-container-txt-section">Информация</div>
+            <div class="menu-container-txt-section">—</div>
+        </div>
+
+        <a th:href="@{/usermanual}" href="usermanual.html" class="menu-container">
+            <div class="menu-container-txt">Руковоство<br>пользователя</div>
+            <div class="menu-container-img"><img class="menu-img" th:src="@{/sources/usermanual.png}" alt="#"></div>
+        </a>
+
+        <div class="menu-container-section">
+            <div class="menu-container-txt-section">© Chip. Education</div>
+
+        </div>
+    </div>
+</div>

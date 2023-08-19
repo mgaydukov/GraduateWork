@@ -1,0 +1,31 @@
+<!DOCTYPE html >
+<html xmlns:th="http://www.thymeleaf.org">
+<div th:insert="blocks/links :: head"></div>
+<body>
+    <div th:insert="blocks/menu :: menu"></div>
+    <div class="main">
+        <div class="user-edit">
+            <div class="user-edit-header" style="text-align: center"><p style="padding-top: 10px;">Изменение профиля</p></div>
+            <div class="user-edit-content">
+                <div class="user-edit-labels">
+                    <div class="user-edit-label">Изменить имя</div>
+                    <div class="user-edit-label">Изменить биографию</div>
+                    <div class="user-edit-label">Изменить фото профиля</div>
+                    <div class="user-edit-label">Изменить пароль</div>
+                </div>
+                <form class="user-edit-inputs" th:action="@{/user/edit/}" method="post">
+                    <input type="text" name="username" class="user-edit-input" th:value="${username}"/>
+                    <input type="text" name="bio" class="user-edit-input" th:value="${bio}"/>
+                    <input type="text" name="profilePic" class="user-edit-input" th:value="${profilePic}" />
+                    <input type="password" name="password" class="user-edit-input" th:value="${password}" />
+                    <button class="user-edit-button" type="submit">Сохранить</button>
+                    <a href="javascript:history.back()" class="back-to-list">Назад</a>
+                </form>
+            </div>
+        </div>
+        <form class="user-edit-inputs" th:action="@{/user/edit/delete/}" method="post">
+            <button class="user-edit-button" type="submit" style="width: 900px; margin: 20px auto;">Удалить учетную запись</button>
+        </form>
+    </div>
+</body>
+</html>

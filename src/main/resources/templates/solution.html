@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<div th:insert="blocks/links :: head"></div>
+<body>
+    <div th:insert="blocks/menu :: menu"></div>
+    <div class="main">
+
+        <div class="answer-container" th:each="v:${video}">
+
+            <div class="answer-header">
+                <div class="answer-video-title" th:text="${v.name}"/>
+                <a th:href="@{'/video/' + ${v.id}}" class="back-to-video">Вернуться к видео</a>
+            </div>
+
+            <div class="answer-explanations">Напишите краткое эссе (изложение) по услышанному из видео:</div>
+
+            <form th:action="@{'/video/' + ${v.id} + '/solution'}" method="post">
+                <textarea th:text="${request}" name="prompt" class="answer-textarea" placeholder="Пишите здесь" wrap="soft" />
+                <div class="answer-botton-submit-container">
+                    <input class="answer-botton-submit" type="submit" value="Отправить ответ"/>
+                </div>
+            </form>
+
+            <div th:if="${response != null }" class="answer-result">
+                <div class="answer-result-header">Ваш результат: Сходство с оригиналом&nbsp;<b th:text="${response}"/></div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

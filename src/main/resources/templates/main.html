@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<div th:insert="blocks/links :: head"></div>
+<body>
+    <div th:insert="blocks/menu :: menu"></div>
+    <div class="main">
+
+        <div class="main-header" style="margin-bottom: 40px;" sec:authorize="hasAuthority('ADMIN')">
+            <a th:href="@{admin/userlist/}" class="main-header-container">
+                <div class="main-header-info">Список пользователей</div>
+            </a>
+        </div>
+
+        <div class="main-header" style="visibility: visible;">
+            <a th:href="@{'/user/' + ${#request.userPrincipal.principal.id}}" class="main-header-container">
+                <div class="main-header-profile-img"><img th:src="${#request.userPrincipal.principal.profilePic}" alt=""></div>
+                <div class="main-header-info">Перейти в профиль</div>
+            </a>
+            <a th:href="@{/video/add}" class="main-header-container">
+                <img class="main-header-img" th:src="@{/sources/video-add.png}" alt="">
+                <div class="main-header-info">Добавить видео</div>
+            </a>
+        </div>
+
+        <div class="main-header-login" style="visibility: hidden;">
+            <a href="login.html" class="main-header-container">
+                <img class="main-header-img" src="../static/sources/login.png" alt="">
+                <div class="main-header-info">Войти</div>
+            </a>
+        </div>    
+
+        <div class="subject-recently" style="visibility: visible;">
+            <div class="subject-recently-title">Популярные видео</div>
+            <div class="subject-list">
+                <a th:each="v:${videos}" th:href="'/video/' + ${v.id}" class="subject-recently-content">
+                    <img class="subject-recently-content-img" th:src="${v.cover}" alt="">
+                    <div class="subject-recently-content-name" th:text="${v.name}"></div>
+                </a>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

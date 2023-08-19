@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<div th:insert="blocks/links :: head"></div>
+<body>
+    <div th:insert="blocks/menu :: menu"></div>
+    <div class="main">
+        <div class="userslist">
+            <h1>User list</h1>
+            <table>
+                <thead style="margin-bottom: 20px;">
+                    <tr>
+                        <th align="left" class="userslist-id">Id</th>
+                        <th align="left" class="userslist-name-head">Name</th>
+                        <th align="left" class="userslist-roles">Roles</th><th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="user:${users}" >
+                        <td  class="userslist-id" th:text="${user.id}"/>
+                        <td><a class="userslist-name" th:text="${user.username}" th:href="'/user/' + ${user.id}"/></td>
+                        <td class="userslist-roles" th:text="${user.roles}"/>
+                        <td><a class="userslist-link" th:href="'/admin/useredit/' + ${user.id}">Редактировать</a></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</body>
+</html>
