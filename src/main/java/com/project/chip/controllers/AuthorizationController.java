@@ -29,10 +29,6 @@ public class AuthorizationController {
     public String addUser(User user,
                           @RequestParam String confirm,
                           Model model) {
-//        if (user.getPassword() != confirm) {
-//            model.addAttribute("errorMessage", "Пароли не совпадают!");
-//            return "registration";
-//        }
 
         if(!userService.addUser(user)){
             model.addAttribute("errorMessage", "Пользователь с таким именем уже существует!");
